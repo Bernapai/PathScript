@@ -84,3 +84,54 @@ function precioMayora40(producto) {
         console.log(producto.nombre + ' tiene un precio mayor a 40');
     }
 }
+
+
+//Ejercicio 6
+let productos = [
+    { nombre: 'Arroz', precio: 20 },
+    { nombre: 'Fideos', precio: 40 },
+    { nombre: 'Pan', precio: 35 }
+];
+
+
+function existeProducto(nombre, array, cb) {
+    for (let i = 0; i < array.length; i++) {
+        cb(nombre, array[i]);
+    }
+}
+
+function chequeo(nombre, producto) {
+    if (nombre === producto.nombre) {
+        console.log('El producto ' + nombre + ' existe');
+    } else {
+        console.log('El producto ' + nombre + ' no existe');
+    }
+}
+
+
+//Ejercicio 7 final
+
+let arrayProdcuts = [
+    { nombre: 'Arroz', precio: 20, stock: 5 },
+    { nombre: 'Fideos', precio: 40, stock: 2 },
+    { nombre: 'Pan', precio: 35, stock: 0 },
+];
+let nuevosProductos = []
+
+function verificarStocker(array, cb) {
+    for (let i = 0; i < array.length; i++) {
+        cb(array[i], cb);
+    }
+}
+
+
+function verificarSiTienestock(producto, cb) {
+    if (producto.stock > 0) {
+        console.log(producto.nombre + ' tiene stock');
+    } else {
+        console.log(producto.nombre + ' no tiene stock');
+    }
+}
+
+
+
