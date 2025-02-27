@@ -12,8 +12,6 @@
 
 # Semana 3: Profundización
 - **Día 1-2 (09)**: Node.js y npm (crear un servidor básico).
-- **Día 3-4 (10)**: Express.js (crear una API REST).
-- **Día 5-6 (11)**: Bases de datos (MongoDB o SQL con Node.js).
 
-# Semana 4: Salto
-- Desarrollar en TypeScript.
+# Semana 4: Salto A NodeJs con ApiRest Completa
+- Desarrollar tu propio proyecto ApiRest
