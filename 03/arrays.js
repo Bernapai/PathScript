@@ -12,3 +12,5 @@ console.log(mezclado[2]); // true
 
 let animales = ["Perro", "Gato", "Pez"];
 console.log(animales.length); // 3
+
+
