@@ -11,7 +11,6 @@
 - **Día 7 (08)**: Práctica integrada (Asincronia y POO).
 
 # Semana 3: Profundización
-- **Día 1-2 (09)**: Node.js y npm (crear un servidor básico).
+- **Dia 1-7 (09)**: Practica y Adaptacion e Typescript
 
-# Semana 4: Salto A NodeJs con ApiRest Completa
-- Desarrollar tu propio proyecto ApiRest
+
