@@ -12,6 +12,3 @@
 
 # Semana 3: Profundización
 - **Día 1-7 (09)**: Practicar en Typescript repetir proceso pero ahora con Typescript
-
-# Semana 4: Salto A NodeJs Typescript con ApiRest Completa
-- Desarrollar tu propio proyecto ApiRest
