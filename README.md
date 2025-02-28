@@ -11,6 +11,7 @@
 - **Día 7 (08)**: Práctica integrada (Asincronia y POO).
 
 # Semana 3: Profundización
-- **Dia 1-7 (09)**: Practica y Adaptacion e Typescript
+- **Día 1-7 (09)**: Practicar en Typescript repetir proceso pero ahora con Typescript
 
-
+# Semana 4: Salto A NodeJs Typescript con ApiRest Completa
+- Desarrollar tu propio proyecto ApiRest
