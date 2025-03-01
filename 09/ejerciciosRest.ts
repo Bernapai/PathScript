@@ -81,3 +81,298 @@
 // - Si el precio del producto es menor que 0, la función debe rechazar con un error "Precio inválido".
 // - Si se crea con éxito, la respuesta debe contener el objeto del nuevo producto con un `id` auto-incrementado.
 
+
+
+
+
+// Ejercicio 1: Simulación de un retraso en una API
+function simulateDelay(ms: number): Promise<string> {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("Datos cargados");
+        }, ms);
+    });
+}
+
+// Endpoint REST simulado
+/*app.get("/delay", async (req, res) => {
+    const data = await simulateDelay(2000);
+    res.json({ message: data });
+}); */
+
+
+
+// Ejercicio 2: Obtener un usuario por ID (simulando una base de datos)
+
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+
+const users: User[] = [
+    { id: 1, name: "Alice", age: 30 },
+    { id: 2, name: "Bob", age: 25 },
+    { id: 3, name: "Charlie", age: 35 },
+];
+
+function getUserById(id: number): Promise<User> {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const user = users.find((user) => user.id === id);
+            if (!user) {
+                reject("Usuario no encontrado");
+            } else {
+                resolve(user);
+            }
+        }, 1000);
+    });
+}
+
+async function getUserByIdHandler(req: any, res: any) {
+    const id = parseInt(req.params.id);
+    try {
+        const user = await getUserById(id);
+        res.json(user);
+    } catch (error) {
+        res.status(404).json({ error: error });
+    }
+}
+
+
+//Ejercicio 3
+
+interface NewUser {
+    name: string;
+    age: number;
+}
+
+const newUsers: User[] = [
+    { id: 1, name: "Alice", age: 30 },
+    { id: 2, name: "Bob", age: 25 },
+    { id: 3, name: "Charlie", age: 35 },
+];
+
+
+function addUser(user: NewUser): Promise<User> {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (!user.name) {
+                reject("Nombre de usuario requerido");
+            } else {
+                const newUser = { id: newUsers.length + 1, ...user };
+                newUsers.push(newUser);
+                resolve(newUser);
+            }
+        }, 1000);
+    });
+}
+
+async function addUserHandler(req: any, res: any) {
+    const user = req.body;
+    try {
+        const newUser = await addUser(user);
+        res.json(newUser);
+    } catch (error) {
+        res.status(400).json({ error: error });
+    }
+}
+
+
+
+//Ejercicio 4
+
+
+function getAllUsers(): Promise<User[]> {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(users);
+        }, 1000);
+    });
+}
+
+async function getAllUsersHandler(req: any, res: any) {
+    const allUsers = await getAllUsers();
+    res.json(allUsers);
+}
+
+//Ejercicio 5 
+
+
+function updateUser(id: number, data: Partial<User>): Promise<User> {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const index = users.findIndex((user) => user.id === id);
+            if (index === -1) {
+                reject("Usuario no encontrado");
+            } else {
+                users[index] = { ...users[index], ...data };
+                resolve(users[index]);
+            }
+        }, 1000);
+    });
+}
+
+async function updateUserId(req: any, res: any) {
+    const id = parseInt(req.params.id);
+    const data = req.body;
+    try {
+        const updatedUser = await updateUser(id, data);
+        res.json(updatedUser);
+    } catch (error) {
+        res.status(404).json({ error: error });
+    }
+}
+
+//Ejercicio 6
+
+function deleteUser(id: number): Promise<string> {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const index = users.findIndex((user) => user.id === id);
+            if (index === -1) {
+                reject("Usuario no encontrado");
+            } else {
+                users.splice(index, 1);
+                resolve("Usuario eliminado");
+            }
+        }, 1000);
+    });
+}
+
+async function deleteUserHandler(req: any, res: any) {
+    const id = parseInt(req.params.id);
+    try {
+        const message = await deleteUser(id);
+        res.json({ message: message });
+    } catch (error) {
+        res.status(404).json({ error: error });
+    }
+}
+
+//Ejercicio 7
+
+const products = [
+    { id: 1, name: "Product 1" },
+    { id: 2, name: "Product 2" },
+    { id: 3, name: "Product 3" },
+];
+
+function getProductById(id: number): Promise<any> {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const product = products.find((product) => product.id === id);
+            if (!product) {
+                reject("Producto no encontrado");
+            } else {
+                resolve(product);
+            }
+        }, 1000);
+    });
+}
+
+async function getProductByIdHandler(req: any, res: any) {
+    const id = parseInt(req.params.id);
+    try {
+        const product = await getProductById(id);
+        res.json(product);
+    } catch (error) {
+        res.status(404).json({ error: error });
+    }
+}
+
+//Ejercicio 8
+
+interface Product {
+    id: number;
+    name: string;
+    category: string;
+    price: number;
+}
+
+const productsList: Product[] = [
+    { id: 1, name: "Product 1", category: "Category 1", price: 10 },
+    { id: 2, name: "Product 2", category: "Category 2", price: 20 },
+    { id: 3, name: "Product 3", category: "Category 1", price: 30 },
+];
+
+function getProductsByCategory(category: string): Promise<Product[]> {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const filteredProducts = productsList.filter((product) => product.category === category);
+            resolve(filteredProducts);
+        }, 1000);
+    });
+}
+
+async function getProductsByCategoryHandler(req: any, res: any) {
+    const category = req.params.category;
+    const products = await getProductsByCategory(category);
+    res.json(products);
+}
+
+//Ejercicio 9
+
+interface Credentials {
+    username: string;
+    password: string;
+}
+
+function authenticateUser(credentials: Credentials): Promise<string> {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (credentials.username === "admin" && credentials.password === "admin") {
+                resolve("token");
+            } else {
+                reject("Credenciales incorrectas");
+            }
+        }, 1000);
+    });
+}
+
+async function authenticateUserHandler(req: any, res: any) {
+    const credentials = req.body;
+    try {
+        const token = await authenticateUser(credentials);
+        res.json({ token: token });
+    } catch (error) {
+        res.status(401).json({ error: error });
+    }
+}
+//Ejercicio 10
+
+interface NewProduct {
+    name: string;
+    category: string;
+    price: number;
+}
+
+const newProducts: Product[] = [
+    { id: 1, name: "Product 1", category: "Category 1", price: 10 },
+    { id: 2, name: "Product 2", category: "Category 2", price: 20 },
+    { id: 3, name: "Product 3", category: "Category 1", price: 30 },
+];
+
+function createProduct(product: NewProduct): Promise<Product> {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (product.price < 0) {
+                reject("Precio inválido");
+            } else {
+                const newProduct = { id: newProducts.length + 1, ...product };
+                newProducts.push(newProduct);
+                resolve(newProduct);
+            }
+        }, 1000);
+    });
+}
+
+async function createProductHandler(req: any, res: any) {
+    const product = req.body;
+    try {
+        const newProduct = await createProduct(product);
+        res.json(newProduct);
+    } catch (error) {
+        res.status(400).json({ error: error });
+    }
+}

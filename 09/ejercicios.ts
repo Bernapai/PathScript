@@ -287,3 +287,86 @@ const updateOrder = (pedido: Pedido): Promise<Pedido> => {
         }, 2000);
     });
 }
+
+//Ejercicio 9: Retrasar múltiples funciones
+
+interface Order {
+    id: number;
+    estado: string;
+}
+
+const orders: Order[] = [
+    { id: 1, estado: 'pendiente' },
+    { id: 2, estado: 'pendiente' },
+    { id: 3, estado: 'pendiente' }
+];
+
+function processOrder(order: Order): Promise<Order> {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            order.estado = 'procesado';
+            resolve(order);
+        }, 2000);
+    });
+}
+
+function checkPayment(order: Order): Promise<Order> {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            order.estado = 'pagado';
+            resolve(order);
+        }, 2000);
+    });
+}
+
+function shipOrder(order: Order): Promise<Order> {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            order.estado = 'enviado';
+            resolve(order);
+        }, 2000);
+    });
+}
+
+async function procesarPedido() {
+    try {
+        for (let i = 0; i < orders.length; i++) {
+            const order = await processOrder(orders[i]);
+            console.log(order);
+            const payment = await checkPayment(order);
+            console.log(payment);
+            const shipped = await shipOrder(payment);
+            console.log(shipped);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//Ejercicio 10: Simulando una cola de tareas
+
+interface Tarea {
+    id: number;
+    nombre: string;
+}
+
+const tareas: Tarea[] = [
+    { id: 1, nombre: 'Tarea 1' },
+    { id: 2, nombre: 'Tarea 2' },
+    { id: 3, nombre: 'Tarea 3' }
+];
+
+function processTask(task: Tarea): Promise<Tarea> {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log(`Procesando tarea: ${task.nombre}`);
+            resolve(task);
+        }, 2000);
+    });
+}
+
+async function processTaskQueue(tasks: Tarea[]) {
+    for (let i = 0; i < tasks.length; i++) {
+        await processTask(tasks[i]);
+    }
+}
